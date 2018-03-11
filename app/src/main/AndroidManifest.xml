@@ -23,7 +23,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".homePageActivity" />
-        <activity android:name=".resultPage"></activity>
+        <activity android:name=".emailSearchPage" />
+        <activity android:name=".tagSearchPage" />
+        <activity android:name=".ResultPage"></activity>
     </application>
 
 </manifest>

@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">HamsterHelp</string>
     <string name="HamsterHelp">HamsterHelp</string>
+    <string name="email">Email</string>
+    <string name="tag">Tag</string>
+    <string name="logo">logo</string>
 </resources>
