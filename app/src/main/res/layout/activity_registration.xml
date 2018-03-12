@@ -5,7 +5,7 @@
     android:id="@+id/Constraint"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:maxHeight="520dp"
+    android:maxHeight="800dp"
     android:maxWidth="410dp"
     android:minHeight="20dp"
     android:minWidth="20dp"
