@@ -39,9 +39,13 @@ public class Databasehelper extends SQLiteOpenHelper {
         this.sqLiteDatabase = sqLiteDatabase;
     }
     public void insertInfo( Userinfo u){
+
         sqLiteDatabase = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         String query = "select * from Information";
+        // Uncomment this two line if can not find the table Tag
+        //String query1 = "ALTER TABLE Information ADD COLUMN Tag ";
+        //sqLiteDatabase.execSQL(query1);
         Cursor cursor = sqLiteDatabase.rawQuery(query, null);
         int count = cursor.getCount();
         values.put(COLUMN_ID, count);

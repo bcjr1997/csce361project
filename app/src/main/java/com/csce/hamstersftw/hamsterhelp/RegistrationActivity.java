@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -29,6 +30,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
     private EditText address2;
     private EditText email;
     private EditText pass;
+    public String Tags = "Here to Help!";
 
 
     Databasehelper helper = new Databasehelper(this);
@@ -55,6 +57,21 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
                 android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.names));
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mySpinner.setAdapter(myAdapter);
+        mySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (position == 0){
+                    Tags = "Here to Help!";
+                }else if (position == 1){
+                    Tags = "I need Help!";
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
     }
     private int checker(){
@@ -168,6 +185,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
                 u.setAddressLine2(addres2);
                 u.setEmail(Email);
                 u.setPassword(Password);
+                u.setTag(Tags);
                 helper.insertInfo(u);
 
                 Intent i = new Intent(this, Login.class);
