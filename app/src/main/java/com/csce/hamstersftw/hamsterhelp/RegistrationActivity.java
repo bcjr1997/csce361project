@@ -15,6 +15,8 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 
+import com.facebook.stetho.Stetho;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -39,6 +41,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Stetho.initializeWithDefaults(this);
         setContentView(R.layout.activity_registration);
         progressDialog = new ProgressDialog(this);
         register = findViewById(R.id.Register1);
