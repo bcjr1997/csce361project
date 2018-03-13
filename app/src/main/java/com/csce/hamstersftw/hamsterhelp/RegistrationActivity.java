@@ -59,8 +59,6 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
     }
     private int checker(){
         int i = 0;
-
-
         String firstname = firstName.getText().toString();
 
         String lastname = lastName.getText().toString();
