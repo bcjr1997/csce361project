@@ -19,10 +19,21 @@ public class Userinfo {
     private String lastName;
     private String birthDay;
     private String mobile;
+
+
+
     private String addressLine1;
     private String addressLine2;
     private String email;
     private String password;
+    private String Tag;
+    public String getTag() {
+        return Tag;
+    }
+
+    public void setTag(String tag) {
+        Tag = tag;
+    }
 
     public String getFirstName() {
         return firstName;

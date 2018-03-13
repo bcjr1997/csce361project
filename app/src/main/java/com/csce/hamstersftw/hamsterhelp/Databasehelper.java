@@ -24,9 +24,10 @@ public class Databasehelper extends SQLiteOpenHelper {
     private static final String COLUMN_a2 = "addressLine2";
     private static final String COLUMN_e = "email";
     private static final String COLUMN_p = "password";
+    private static final String COLUMN_Tag = "Tag";
     SQLiteDatabase sqLiteDatabase;
     private static final String TABLE_CREATE = "create table Information (id integer primary key not null , " +
-            "FirstName text not null, lastName text not null, birthDay text not null, mobile text not null, addressLine1 text not null, addressLine2 text not null,email text not null,password text not null)";
+            "Tag text not null, FirstName text not null, lastName text not null, birthDay text not null, mobile text not null, addressLine1 text not null, addressLine2 text not null,email text not null,password text not null)";
 
     public Databasehelper(Context context){
         super(context,DATABASE_NAME,null,DATABASE_VERSION);
@@ -44,6 +45,7 @@ public class Databasehelper extends SQLiteOpenHelper {
         Cursor cursor = sqLiteDatabase.rawQuery(query, null);
         int count = cursor.getCount();
         values.put(COLUMN_ID, count);
+        values.put(COLUMN_Tag,u.getTag());
         values.put(COLUMN_Fname, u.getFirstName());
         values.put(COLUMN_Lname,u.getLastName());
         values.put(COLUMN_Bday,u.getBirthDay());

@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -29,6 +30,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
     private EditText address2;
     private EditText email;
     private EditText pass;
+    public String Tag;
 
 
     Databasehelper helper = new Databasehelper(this);
@@ -55,6 +57,22 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
                 android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.names));
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mySpinner.setAdapter(myAdapter);
+
+        mySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (position == 0){
+                    Tag = "Helper";
+                }else if (position == 1){
+                    Tag = "I need Help!";
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
     }
     private int checker(){
@@ -94,14 +112,14 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
         Pattern Date = Pattern.compile("\\d{2}/\\d{2}/\\d{4}");
         int CheckEmpty = checker();
         if (CheckEmpty == 1 ){
-            progressDialog.setMessage("Please fill all the information");
+            progressDialog.setMessage("Please fill all the information ");
             progressDialog.show();
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
 
-                    Intent i=new Intent(RegistrationActivity.this,RegistrationActivity.class);
-                    startActivity(i);
+
+                    progressDialog.cancel();
                 }
             }, 5000);
         }else {
@@ -170,6 +188,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
                 u.setAddressLine2(addres2);
                 u.setEmail(Email);
                 u.setPassword(Password);
+                u.setTag(Tag);
                 helper.insertInfo(u);
 
                 Intent i = new Intent(this, Login.class);
