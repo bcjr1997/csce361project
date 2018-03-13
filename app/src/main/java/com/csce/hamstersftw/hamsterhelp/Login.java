@@ -43,20 +43,20 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         //progressDialog.setMessage("REACHED1");
         //progressDialog.show();
         if (TextUtils.isEmpty(emailAddress) && TextUtils.isEmpty(pass) ) {
-            Toast.makeText(this,"Please enter your email and password",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Please enter email address and password",Toast.LENGTH_LONG).show();
             i = 1;
 //        progressDialog.setMessage("Taking you in");
 //        progressDialog.show();
         }
         else if(TextUtils.isEmpty(emailAddress)){
-            Toast.makeText(this,"Please enter the email",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Please enter email address",Toast.LENGTH_LONG).show();
             i=1;
             //  progressDialog.setMessage("REACHED2");
             //  progressDialog.show();
             // return;
         }
         else if(TextUtils.isEmpty(pass)){
-            Toast.makeText(this,"Please enter the password to login",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Please enter password",Toast.LENGTH_LONG).show();
             i=1;
             //  progressDialog.setMessage("REACHED3");
             // progressDialog.show();
@@ -77,7 +77,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                 if (pass.equals(password)) {
                     startActivity(new Intent(this, homePageActivity.class));
                 } else {
-                    Toast.makeText(this, "Password or email is incorrect", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "Password or email address is incorrect", Toast.LENGTH_LONG).show();
                 }
             }
         }

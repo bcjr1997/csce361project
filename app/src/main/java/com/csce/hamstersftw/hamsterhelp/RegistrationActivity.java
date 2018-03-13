@@ -94,7 +94,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
         Pattern Date = Pattern.compile("\\d{2}/\\d{2}/\\d{4}");
         int CheckEmpty = checker();
         if (CheckEmpty == 1 ){
-            progressDialog.setMessage("Please fill all the information");
+            progressDialog.setMessage("Please fill all information");
             progressDialog.show();
             new Handler().postDelayed(new Runnable() {
                 @Override
@@ -122,7 +122,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
             Matcher DateCheck = Date.matcher(birthday);
             if (!matcher.matches() && !matcher1.matches() && !DateCheck.matches()){
                 ii = 1;
-                progressDialog.setMessage("Birthday and Phone number are in incorrect form  ");
+                progressDialog.setMessage("Birthday and mobile number are in incorrect format");
                 progressDialog.show();
                 new Handler().postDelayed(new Runnable() {
                     @Override
@@ -135,7 +135,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
             }
             else if (!matcher.matches() && !matcher1.matches()) {
                 ii =1;
-                progressDialog.setMessage("Phone number is invalid");
+                progressDialog.setMessage("Mobile number is invalid");
                 progressDialog.show();
                 new Handler().postDelayed(new Runnable() {
                     @Override
@@ -147,7 +147,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
 
             }else if (!DateCheck.matches()){
                 ii =1;
-                progressDialog.setMessage("Please Enter your Birthday in the correct form mm/dd/yy");
+                progressDialog.setMessage("Please enter DOB in the form of MM/DD/YYYY");
                 progressDialog.show();
                 new Handler().postDelayed(new Runnable() {
                     @Override
