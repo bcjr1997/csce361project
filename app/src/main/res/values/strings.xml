@@ -4,4 +4,8 @@
     <string name="email">Email</string>
     <string name="tag">Tag</string>
     <string name="logo">logo</string>
+    <string-array name="names">
+        <item>Helper</item>
+        <item>I need Help!</item>
+    </string-array>
 </resources>

@@ -6,9 +6,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.app.ProgressDialog;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 
@@ -47,6 +49,13 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
         email = findViewById(R.id.email);
         pass = findViewById(R.id.password);
         register.setOnClickListener(this);
+
+        Spinner mySpinner = (Spinner) findViewById(R.id.spinner);
+        ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(RegistrationActivity.this,
+                android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.names));
+        myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mySpinner.setAdapter(myAdapter);
+
     }
     private int checker(){
         int i = 0;
