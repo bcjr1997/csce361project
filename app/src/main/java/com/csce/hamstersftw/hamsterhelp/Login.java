@@ -41,14 +41,14 @@ public class Login extends AppCompatActivity implements OnClickListener {
         String pass = password.getText().toString().trim();
 
         if(TextUtils.isEmpty(emailAddress)){
-            Toast.makeText(this,"Please enter the email",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Please enter a valid email address",Toast.LENGTH_LONG).show();
             return;
         }
         if(TextUtils.isEmpty(pass)){
-            Toast.makeText(this,"Please enter the password to login",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Please enter password",Toast.LENGTH_LONG).show();
             return;
         }
-        progressDialog.setMessage("Taking you in");
+        progressDialog.setMessage("Logging in");
         progressDialog.show();
          startActivity(new Intent( this, homePageActivity.class));
      }
