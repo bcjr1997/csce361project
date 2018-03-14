@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.ArrayList;
+
 /**
  * Created by shivk on 3/11/2018.
  */
@@ -81,11 +83,36 @@ public class Databasehelper extends SQLiteOpenHelper {
         }
         return b;
     }
+    public ArrayList<String> serachTag(String Tag){
+        sqLiteDatabase = this.getReadableDatabase();
+        ArrayList<String> TagInformation = new ArrayList<String>();
+        String query = "select Tag,FirstName from "+TABLE_NAME;
+        Cursor cursor = sqLiteDatabase.rawQuery(query,null);
+        Userinfo TagInfo = new Userinfo();
+        String a,FirstName;  
+        FirstName = "not found";
+        if(cursor.moveToFirst()){
+            do{
+                a = cursor.getString(0);
+                if(a != null) {
+                    if (a.equals(Tag)) {
+                        FirstName = cursor.getString(1);
+//                   TagInfo.setFirstName(cursor.getString(1));
+//                   TagInfo.setLastName(cursor.getString(2));
+//                   TagInfo.setMobile(cursor.getString(3));
+//                   TagInfo.setEmail(cursor.getString(4));
+                        TagInformation.add(FirstName);
+                    }
+                }
+            }while(cursor.moveToNext());
+        }
+        return TagInformation;
+    }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-        String query = "DROP TABLE IF EXISTS" + TABLE_NAME;
-        sqLiteDatabase.execSQL(query);
-        this.onCreate(sqLiteDatabase);
+//        String query = "DROP TABLE IF EXISTS" + TABLE_NAME;
+//        sqLiteDatabase.execSQL(query);
+//        this.onCreate(sqLiteDatabase);
     }
 }

@@ -83,9 +83,9 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
 
         String lastname = lastName.getText().toString();
 
-        String birthday = birthDay.getText().toString();
+        String birthday = birthDay.getText().toString().trim();
 
-        String phno = mobile.getText().toString();
+        String phno = mobile.getText().toString().trim();
 
         String addres1 = address1.getText().toString();
 
@@ -128,13 +128,13 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
             int ii = 0;
             String firstname = firstName.getText().toString();
             String lastname = lastName.getText().toString();
-            String birthday = birthDay.getText().toString();
+            String birthday = birthDay.getText().toString().trim();
             String addres1 = address1.getText().toString();
             String addres2 = address2.getText().toString();
             String Email = email.getText().toString();
             String Password = pass.getText().toString();
             Userinfo u = new Userinfo();
-            String phno = mobile.getText().toString();
+            String phno = mobile.getText().toString().trim();
             Matcher matcher = pattern.matcher(phno);
             Matcher matcher1 = pattern1.matcher(phno);
             Matcher DateCheck = Date.matcher(birthday);

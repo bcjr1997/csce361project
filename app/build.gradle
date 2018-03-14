@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
+
     compileSdkVersion 26
     defaultConfig {
         applicationId "com.csce.hamstersftw.hamsterhelp"
@@ -17,6 +18,7 @@ android {
         }
     }
     sourceSets {
+
         main.java.srcDirs += 'src/main/<YOUR DIRECTORY>'
     }
 }
