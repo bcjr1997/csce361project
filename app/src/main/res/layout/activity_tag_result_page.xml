@@ -6,33 +6,51 @@
     android:layout_height="match_parent"
     tools:context="com.csce.hamstersftw.hamsterhelp.tagSearchPage">
 
-    <EditText
-        android:id="@+id/editText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="50dp"
-        android:layout_marginEnd="100dp"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="260dp"
-        android:ems="10"
-        android:hint="Enter tags here"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
+    <!--<EditText-->
+        <!--android:id="@+id/TagSearchBar"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginBottom="50dp"-->
+        <!--android:layout_marginEnd="100dp"-->
+        <!--android:layout_marginStart="100dp"-->
+        <!--android:layout_marginTop="260dp"-->
+        <!--android:ems="10"-->
+        <!--android:hint="Enter tags here"-->
+        <!--android:inputType="textPersonName"-->
+        <!--app:layout_constraintBottom_toTopOf="@+id/TagButton"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toTopOf="parent" />-->
+
+
+    <Spinner
+        android:id="@+id/spinner1"
+        android:layout_width="355dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="44dp"
+        android:layout_marginEnd="28dp"
+
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="15dp"
+        android:dropDownWidth="match_parent"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/TagButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
+        <!--app:layout_constraintTop_toBottomOf="@+id/TagSearchBar" />-->
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/TagButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="300dp"
         android:layout_marginEnd="160dp"
         android:layout_marginStart="160dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="15dp"
         android:text="Search"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+        app:layout_constraintTop_toBottomOf="@+id/spinner1" />
+        <!--app:layout_constraintTop_toBottomOf="@+id/TagSearchBar" />-->
 </android.support.constraint.ConstraintLayout>

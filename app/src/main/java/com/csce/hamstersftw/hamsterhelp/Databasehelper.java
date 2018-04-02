@@ -83,6 +83,31 @@ public class Databasehelper extends SQLiteOpenHelper {
         }
         return b;
     }
+    public String EmailChecking(String email){
+        sqLiteDatabase = this.getReadableDatabase();
+        String query = "select email from "+TABLE_NAME;
+        Cursor cursor = sqLiteDatabase.rawQuery(query,null);
+        String a,b;
+        b = "false";
+
+        if(cursor.moveToFirst()){
+            do{
+                a = cursor.getString(0);
+                if(a != null) {
+                    if (a.equals(email)) {
+                        b = "true";
+                        break;
+                    }
+                    else {
+                        b = "false";
+                    }
+                }
+            }while(cursor.moveToNext());
+        }
+
+
+        return b;
+    }
     public ArrayList<String> serachTag(String Tag){
         sqLiteDatabase = this.getReadableDatabase();
         ArrayList<String> TagInformation = new ArrayList<String>();
@@ -91,6 +116,7 @@ public class Databasehelper extends SQLiteOpenHelper {
         Userinfo TagInfo = new Userinfo();
         String a,FirstName;
         FirstName = "not found";
+
         if(cursor.moveToFirst()){
             do{
                 a = cursor.getString(0);
@@ -108,6 +134,70 @@ public class Databasehelper extends SQLiteOpenHelper {
         }
         return TagInformation;
     }
+    public ArrayList<String> PersonalInformation(String FirstName, String Tag) {
+        sqLiteDatabase = this.getReadableDatabase();
+        ArrayList<String> PersonInformation = new ArrayList<String>();
+        String query = "select FirstName,Tag,lastName,mobile,email from "+TABLE_NAME;
+        Cursor cursor = sqLiteDatabase.rawQuery(query,null);
+        String a,b,firstName,lastName,Mobile,Email;
+        firstName = "not found";
+        lastName = "not found";
+        Mobile = "not found";
+        Email = "not found";
+        if(cursor.moveToFirst()){
+            do{
+                a = cursor.getString(0);
+                b = cursor.getString(1);
+                if(a != null && b != null) {
+                    if (a.equals(FirstName) && b.equals(Tag)) {
+
+                        lastName=  cursor.getString(2);
+                        Mobile = cursor.getString(3);
+                        Email = cursor.getString(4);
+                        PersonInformation.add(FirstName);
+                        PersonInformation.add(lastName);
+                        PersonInformation.add(Email);
+                        PersonInformation.add(Mobile);
+                        break;
+                    }
+                }
+            }while(cursor.moveToNext());
+        }
+        return PersonInformation;
+    }
+    public ArrayList<String> EmailSearchPersonalInformation(String Email ) {
+        sqLiteDatabase = this.getReadableDatabase();
+        ArrayList<String> PersonInformationByEmail = new ArrayList<String>();
+        String query = "select email,FirstName,lastName,mobile from "+TABLE_NAME;
+        Cursor cursor = sqLiteDatabase.rawQuery(query,null);
+        String a,firstName,lastName,Mobile;
+        firstName = "not found";
+        lastName = "not found";
+        Mobile = "not found";
+
+        if(cursor.moveToFirst()){
+            do{
+                a = cursor.getString(0);
+
+                if(a != null ) {
+                    if (a.equals(Email) ) {
+                        firstName= cursor.getString(1);
+                        lastName=  cursor.getString(2);
+                        Mobile = cursor.getString(3);
+
+                        PersonInformationByEmail.add(firstName);
+                        PersonInformationByEmail.add(lastName);
+                        PersonInformationByEmail.add(Email);
+                        PersonInformationByEmail.add(Mobile);
+                        break;
+                    }
+                }
+            }while(cursor.moveToNext());
+        }
+        return PersonInformationByEmail;
+    }
+
+
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {

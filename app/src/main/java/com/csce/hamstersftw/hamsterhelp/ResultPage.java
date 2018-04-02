@@ -1,7 +1,10 @@
 package com.csce.hamstersftw.hamsterhelp;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -10,6 +13,7 @@ import java.util.ArrayList;
 
 public class ResultPage extends AppCompatActivity {
      Databasehelper helper = new Databasehelper(this);
+     private String TagPerson = " Tag not found";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -17,6 +21,7 @@ public class ResultPage extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         String Tags = bundle.getString("Tag");
         ArrayList<String> FirstNameList = new ArrayList<String>();
+        TagPerson = Tags ;
         //String test = "Duc";
         FirstNameList = helper.serachTag(Tags);
 
@@ -24,6 +29,23 @@ public class ResultPage extends AppCompatActivity {
                 FirstNameList);
         ListView ListSearchView = (ListView) findViewById(R.id.ListView);
         ListSearchView.setAdapter(ListSearch);
+
+        ListSearchView.setOnItemClickListener(
+                new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                        Intent i = new Intent (view.getContext(),ListViewDisplayPage.class);
+                        String TagName = String.valueOf(parent.getItemAtPosition(position));
+                        Bundle bundle = new Bundle();
+
+                        bundle.putString("Person",TagName);
+                        bundle.putString("TagsPerson",TagPerson);
+                        i.putExtras(bundle);
+                        startActivityForResult(i,position);
+                    }
+                }
+        );
 
     }
 }

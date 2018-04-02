@@ -112,16 +112,17 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
         Pattern Date = Pattern.compile("\\d{2}/\\d{2}/\\d{4}");
         int CheckEmpty = checker();
         if (CheckEmpty == 1 ){
-            progressDialog.setMessage("Please fill all the information");
-            progressDialog.show();
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-
-                    Intent i=new Intent(RegistrationActivity.this,RegistrationActivity.class);
-                    startActivity(i);
-                }
-            }, 5000);
+//            progressDialog.setMessage("Please fill all the information");
+//            progressDialog.show();
+//            new Handler().postDelayed(new Runnable() {
+//                @Override
+//                public void run() {
+//
+//                    Intent i=new Intent(RegistrationActivity.this,RegistrationActivity.class);
+//                    startActivity(i);
+//                }
+//            }, 5000);
+            Toast.makeText(this,"Please fill all the information",Toast.LENGTH_LONG).show();
         }else {
 
 
@@ -138,43 +139,54 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
             Matcher matcher = pattern.matcher(phno);
             Matcher matcher1 = pattern1.matcher(phno);
             Matcher DateCheck = Date.matcher(birthday);
+            String Emailchecker = helper.EmailChecking(Email);
             if (!matcher.matches() && !matcher1.matches() && !DateCheck.matches()){
                 ii = 1;
-                progressDialog.setMessage("Birthday and Phone number are in incorrect form  ");
-                progressDialog.show();
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-
-
-                        progressDialog.cancel();
-                    }
-                }, 5000);
+//                progressDialog.setMessage("Birthday and Phone number are in incorrect form  ");
+//                progressDialog.show();
+//                new Handler().postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//
+//
+//                        progressDialog.cancel();
+//                    }
+//                }, 5000);
+                Toast.makeText(this,"Birthday and Phone number are in incorrect form  ",Toast.LENGTH_LONG).show();
             }
             else if (!matcher.matches() && !matcher1.matches()) {
                 ii =1;
-                progressDialog.setMessage("Phone number is invalid");
-                progressDialog.show();
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-
-                        progressDialog.cancel();
-                    }
-                }, 5000);
+//                progressDialog.setMessage("Phone number is invalid");
+//                progressDialog.show();
+//                new Handler().postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//
+//                        progressDialog.cancel();
+//                    }
+//                }, 5000);
+                Toast.makeText(this,"Phone number is invalid",Toast.LENGTH_LONG).show();
 
             }else if (!DateCheck.matches()){
                 ii =1;
-                progressDialog.setMessage("Please Enter your Birthday in the correct form mm/dd/yy");
-                progressDialog.show();
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-
-
-                        progressDialog.cancel();
-                    }
-                }, 5000);
+//                progressDialog.setMessage("Please Enter your Birthday in the correct form mm/dd/yy");
+//                progressDialog.show();
+//                new Handler().postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//
+//
+//                        progressDialog.cancel();
+//                    }
+//                }, 5000);
+                Toast.makeText(this,"Please Enter your Birthday in the correct form mm/dd/yy",Toast.LENGTH_LONG).show();
+            }
+            else if (Emailchecker == "true"){
+                ii = 1;
+                Toast.makeText(this,"Email Already Exist",Toast.LENGTH_LONG).show();
+            }else  if (firstname == lastname){
+                ii = 1;
+                Toast.makeText(this,"First name and Last Name shouldn't be the same",Toast.LENGTH_LONG).show();
             }
 
 

@@ -25,11 +25,14 @@
         <activity android:name=".homePageActivity" />
         <activity android:name=".emailSearchPage" />
         <activity android:name=".tagSearchPage" />
-        <activity android:name=".ResultPage"></activity>
+        <activity android:name=".ResultPage" />
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
+        <activity android:name=".EmailResultPage" />
+        <activity android:name=".ListViewDisplayPage"></activity>
     </application>
 
 </manifest>
