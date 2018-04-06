@@ -77,7 +77,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                 if (pass.equals(password)) {
                     startActivity(new Intent(this, homePageActivity.class));
                 } else {
-                    Toast.makeText(this, "Password or email address is incorrect", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "Email address or password is incorrect", Toast.LENGTH_LONG).show();
                 }
             }
         }
