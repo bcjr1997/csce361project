@@ -112,7 +112,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
         Pattern Date = Pattern.compile("\\d{2}/\\d{2}/\\d{4}");
         int CheckEmpty = checker();
         if (CheckEmpty == 1 ){
-//            progressDialog.setMessage("Please fill all the information");
+//            progressDialog.setMessage("Please fill in all information");
 //            progressDialog.show();
 //            new Handler().postDelayed(new Runnable() {
 //                @Override
@@ -122,7 +122,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
 //                    startActivity(i);
 //                }
 //            }, 5000);
-            Toast.makeText(this,"Please fill all the information",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Please fill in all information",Toast.LENGTH_LONG).show();
         }else {
 
 
@@ -152,7 +152,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
 //                        progressDialog.cancel();
 //                    }
 //                }, 5000);
-                Toast.makeText(this,"Birthday and Phone number are in incorrect form  ",Toast.LENGTH_LONG).show();
+                Toast.makeText(this,"Birthday and mobile number are in incorrect form ",Toast.LENGTH_LONG).show();
             }
             else if (!matcher.matches() && !matcher1.matches()) {
                 ii =1;
@@ -165,7 +165,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
 //                        progressDialog.cancel();
 //                    }
 //                }, 5000);
-                Toast.makeText(this,"Phone number is invalid",Toast.LENGTH_LONG).show();
+                Toast.makeText(this,"Mobile number is invalid",Toast.LENGTH_LONG).show();
 
             }else if (!DateCheck.matches()){
                 ii =1;
@@ -179,14 +179,14 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
 //                        progressDialog.cancel();
 //                    }
 //                }, 5000);
-                Toast.makeText(this,"Please Enter your Birthday in the correct form mm/dd/yy",Toast.LENGTH_LONG).show();
+                Toast.makeText(this,"Please enter your date of birth in the correct form mm/dd/yy",Toast.LENGTH_LONG).show();
             }
             else if (Emailchecker == "true"){
                 ii = 1;
-                Toast.makeText(this,"Email Already Exist",Toast.LENGTH_LONG).show();
+                Toast.makeText(this,"Email already exist",Toast.LENGTH_LONG).show();
             }else  if (firstname == lastname){
                 ii = 1;
-                Toast.makeText(this,"First name and Last Name shouldn't be the same",Toast.LENGTH_LONG).show();
+                Toast.makeText(this,"First and last name cannot be the same",Toast.LENGTH_LONG).show();
             }
 
 
