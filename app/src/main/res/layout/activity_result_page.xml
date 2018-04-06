@@ -9,31 +9,71 @@
 
     <EditText
         android:id="@+id/emailSearchBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="50dp"
+        android:layout_width="355dp"
+        android:layout_height="40dp"
         android:layout_marginEnd="100dp"
         android:layout_marginStart="100dp"
-        android:layout_marginTop="260dp"
+        android:layout_marginTop="50dp"
         android:ems="10"
+        android:fontFamily="@font/alegreya_sans_sc_medium"
         android:hint="Enter email here"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/searchButton"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
     <Button
         android:id="@+id/searchButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="300dp"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="135dp"
+        android:layout_height="65dp"
         android:layout_marginEnd="160dp"
         android:layout_marginStart="160dp"
         android:layout_marginTop="50dp"
+        android:fontFamily="@font/alegreya_sans_sc_medium"
         android:text="Search"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/emailSearchBar" />
+
+    <ImageView
+        android:id="@+id/imageView9"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_marginEnd="265dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="95dp"
+        android:fontFamily="@font/alegreya_sans_sc_bold"
+        android:text="Email Search"
+        android:textSize="30sp"
+        app:layout_constraintStart_toEndOf="@+id/imageView9"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="33dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="120dp"
+        android:fontFamily="@font/alegreya_sans_sc_medium"
+        android:text="Enter email to search"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView9" />
+
 </android.support.constraint.ConstraintLayout>
