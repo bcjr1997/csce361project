@@ -98,7 +98,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
 
 
         if (TextUtils.isEmpty(firstname) || TextUtils.isEmpty(lastname) || TextUtils.isEmpty(birthday) || TextUtils.isEmpty(phno) || TextUtils.isEmpty(addres1)
-                || TextUtils.isEmpty(Email)|| TextUtils.isEmpty(Password)) {
+                || TextUtils.isEmpty(addres2)|| TextUtils.isEmpty(Email)|| TextUtils.isEmpty(Password)) {
             i = 1;
 
         }
@@ -140,8 +140,6 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
             Matcher matcher1 = pattern1.matcher(phno);
             Matcher DateCheck = Date.matcher(birthday);
             String Emailchecker = helper.EmailChecking(Email);
-            boolean gmail = Email.contains("@gmail.com");
-            boolean yahoo = Email.contains("@yahoo.com");
             if (!matcher.matches() && !matcher1.matches() && !DateCheck.matches()){
                 ii = 1;
 //                progressDialog.setMessage("Birthday and Phone number are in incorrect form  ");
@@ -186,12 +184,9 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
             else if (Emailchecker == "true"){
                 ii = 1;
                 Toast.makeText(this,"Email Already Exist",Toast.LENGTH_LONG).show();
-            }else if (firstname.equals(lastname) ){
+            }else  if (firstname == lastname){
                 ii = 1;
                 Toast.makeText(this,"First name and Last Name shouldn't be the same",Toast.LENGTH_LONG).show();
-            }else if (!gmail && !yahoo){
-                ii = 1;
-                Toast.makeText(this,"The email is in invalid form",Toast.LENGTH_LONG).show();
             }
 
 
