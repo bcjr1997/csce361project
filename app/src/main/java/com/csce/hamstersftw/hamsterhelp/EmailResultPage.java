@@ -1,24 +1,34 @@
 package com.csce.hamstersftw.hamsterhelp;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.hsalf.smilerating.SmileRating;
 
 import java.util.ArrayList;
 
-public class EmailResultPage extends AppCompatActivity {
+public class EmailResultPage extends AppCompatActivity implements View.OnClickListener{
     Databasehelper helper = new Databasehelper(this);
     private static final String TAG = "EmailResultPage";
+    String RatingNumber = "3";
+    private Button AddRating;
+    String email;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_email_result_page);
         Bundle bundle = getIntent().getExtras();
-        String Email = bundle.getString("Email");
-
+        email = bundle.getString("Email");
+        AddRating =  findViewById(R.id.RatingButton);
+        AddRating.setOnClickListener(this);
         ArrayList<String> PersonalInformationByEmail = new ArrayList<String>();
-        PersonalInformationByEmail = helper.EmailSearchPersonalInformation(Email);
+        PersonalInformationByEmail = helper.EmailSearchPersonalInformation(email);
 
         TextView PersonFirstName = (TextView) findViewById(R.id.Firstname1);
         TextView PersonLastName = (TextView) findViewById(R.id.LastName1);
@@ -36,5 +46,46 @@ public class EmailResultPage extends AppCompatActivity {
         Log.d(TAG,"onCreate: " + PersonalLastName);
         Log.d(TAG,"onCreate: " + PersonalEmail);
         Log.d(TAG,"onCreate: " + PersonalMobile);
+        SmileRating smileRating = (SmileRating) findViewById(R.id.smile_Rating);
+
+        smileRating.setOnSmileySelectionListener(new SmileRating.OnSmileySelectionListener() {
+            @Override
+            public void onSmileySelected(int smiley) {
+                switch (smiley){
+                    case SmileRating.BAD:
+                        Toast.makeText(EmailResultPage.this,"Not Quite Well",Toast.LENGTH_SHORT).show();
+                        RatingNumber = "2";
+                        break;
+                    case SmileRating.GOOD:
+                        Toast.makeText(EmailResultPage.this,"Pretty Good",Toast.LENGTH_SHORT).show();
+                        RatingNumber = "4";
+                        break;
+                    case SmileRating.GREAT:
+                        Toast.makeText(EmailResultPage.this,"I Like This",Toast.LENGTH_SHORT).show();
+                        RatingNumber = "5";
+                        break;
+                    case SmileRating.OKAY:
+                        Toast.makeText(EmailResultPage.this,"It's OKAY",Toast.LENGTH_SHORT).show();
+                        RatingNumber = "3";
+                        break;
+                    case SmileRating.TERRIBLE:
+                        Toast.makeText(EmailResultPage.this,"Bitches",Toast.LENGTH_SHORT).show();
+                        RatingNumber = "1";
+                        break;
+
+                }
+            }
+        });
+    }
+    @Override
+    public void onClick(View view) {
+        if(view == AddRating){
+            helper.UpdateRating(email,RatingNumber);
+            Intent i = new Intent(this, emailSearchPage.class);
+//            Bundle bundle = new Bundle();
+//            bundle.putString("Email",email);
+//            i.putExtras(bundle);
+            startActivity(i);
+        }
     }
 }

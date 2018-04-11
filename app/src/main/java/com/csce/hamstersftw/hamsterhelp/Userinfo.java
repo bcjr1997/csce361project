@@ -19,14 +19,31 @@ public class Userinfo {
     private String lastName;
     private String birthDay;
     private String mobile;
-
-
+    private String Rating;
+    private String NumberRating;
 
     private String addressLine1;
     private String addressLine2;
     private String email;
     private String password;
     private String Tag;
+
+    public String getRating() {
+        return Rating;
+    }
+
+    public void setRating(String rating) {
+        Rating = rating;
+    }
+
+    public String getNumberRating() {
+        return NumberRating;
+    }
+
+    public void setNumberRating(String numberRating) {
+        NumberRating = numberRating;
+    }
+
     public String getTag() {
         return Tag;
     }

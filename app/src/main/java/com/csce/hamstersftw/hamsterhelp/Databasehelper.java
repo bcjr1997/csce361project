@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.ArrayList;
 
 /**
@@ -46,8 +48,9 @@ public class Databasehelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         String query = "select * from Information";
         // Uncomment this two line if can not find the table Tag
-        //String query1 = "ALTER TABLE Information ADD COLUMN Tag ";
-        //sqLiteDatabase.execSQL(query1);
+//       String query1 = "ALTER TABLE Information ADD COLUMN NumberRating ";
+//
+//          sqLiteDatabase.execSQL(query1);
         Cursor cursor = sqLiteDatabase.rawQuery(query, null);
         int count = cursor.getCount();
         values.put(COLUMN_ID, count);
@@ -113,7 +116,7 @@ public class Databasehelper extends SQLiteOpenHelper {
         ArrayList<String> TagInformation = new ArrayList<String>();
         String query = "select Tag,FirstName from "+TABLE_NAME;
         Cursor cursor = sqLiteDatabase.rawQuery(query,null);
-        Userinfo TagInfo = new Userinfo();
+       // Userinfo TagInfo = new Userinfo();
         String a,FirstName;
         FirstName = "not found";
 
@@ -134,7 +137,48 @@ public class Databasehelper extends SQLiteOpenHelper {
         }
         return TagInformation;
     }
-    public ArrayList<String> PersonalInformation(String FirstName, String Tag) {
+    public ArrayList<Userinfo> serachTagWithTheObject(String Tag){
+        sqLiteDatabase = this.getReadableDatabase();
+        ArrayList<Userinfo> TagInformation = new ArrayList<Userinfo>();
+        String query = "select Tag,FirstName,Rating,NumberRating,email from "+TABLE_NAME;
+        Cursor cursor = sqLiteDatabase.rawQuery(query,null);
+         
+        String a,FirstName,NumberRating;
+        String Rating = "none";
+        FirstName = "not found";
+        String email ="none";
+        NumberRating = "none";
+
+        if(cursor.moveToFirst()){
+            do{
+                a = cursor.getString(0);
+                Rating = cursor.getString(2);
+                if(a != null) {
+                    if (a.equals(Tag)) {
+                        Userinfo TagInfo = new Userinfo();
+                        FirstName = cursor.getString(1);
+                        email = cursor.getString(4);
+                        if (Rating == null ){
+                            Rating = "Rating :none";
+                        }
+                        NumberRating = cursor.getString(3);
+                        if (NumberRating == null ){
+                            NumberRating = "0 Rating";
+                        }
+                        TagInfo.setFirstName(FirstName);
+                        TagInfo.setRating(Rating);
+                        TagInfo.setNumberRating(NumberRating);
+                        TagInfo.setEmail(email);
+                        TagInformation.add(TagInfo);
+
+                    }
+                }
+            }while(cursor.moveToNext());
+        }
+        return TagInformation;
+    }
+
+    public ArrayList<String> PersonalInformation(String FirstName, String Tag, String email) {
         sqLiteDatabase = this.getReadableDatabase();
         ArrayList<String> PersonInformation = new ArrayList<String>();
         String query = "select FirstName,Tag,lastName,mobile,email from "+TABLE_NAME;
@@ -148,12 +192,13 @@ public class Databasehelper extends SQLiteOpenHelper {
             do{
                 a = cursor.getString(0);
                 b = cursor.getString(1);
-                if(a != null && b != null) {
-                    if (a.equals(FirstName) && b.equals(Tag)) {
+                Email = cursor.getString(4);
+                if(a != null && b != null && Email  != null ) {
+                    if (a.equals(FirstName) && b.equals(Tag) && Email.equals(email)) {
 
                         lastName=  cursor.getString(2);
                         Mobile = cursor.getString(3);
-                        Email = cursor.getString(4);
+
                         PersonInformation.add(FirstName);
                         PersonInformation.add(lastName);
                         PersonInformation.add(Email);
@@ -195,6 +240,71 @@ public class Databasehelper extends SQLiteOpenHelper {
             }while(cursor.moveToNext());
         }
         return PersonInformationByEmail;
+    }
+    public void UpdateRating (String Email, String NewRating){
+        sqLiteDatabase = this.getReadableDatabase();
+        String query = "select email,Rating,NumberRating from "+TABLE_NAME;
+        String query1 =" ";
+        String query2= " ";
+        String query3=" ";
+        String query4= " ";
+        double numNewRating = 0;
+        double numOldRating = 0;
+        double average = 0;
+        double numberOfRating = 0;
+        int NewNumberOfRating =0;
+        String result="";
+        String result2="";
+        double rounded;
+
+        Cursor cursor = sqLiteDatabase.rawQuery(query,null);
+        String email,Rating,NumberRating ;
+        if(cursor.moveToFirst()){
+            do{
+                email = cursor.getString(0);
+                Rating = cursor.getString(1);
+                NumberRating = cursor.getString(2);
+                if(email != null ) {
+                    if (email.equals(Email) ) {
+                        if (Rating == null ){
+                            NewRating ="Rating: "+ NewRating + "/5";
+                            query1="UPDATE " +TABLE_NAME +" SET Rating ="+ "'"+NewRating+"'" +" WHERE email =" + "'"+Email+"'";
+                            query3="UPDATE " +TABLE_NAME +" SET NumberRating ="+ "'"+"1 Rating"+"'" +" WHERE email =" + "'"+Email+"'";
+                            sqLiteDatabase.execSQL(query1);
+                            sqLiteDatabase.execSQL(query3);
+                        }else{
+                            String token[]= Rating.split("/");
+                            String token1[]= token[0].split(" ");
+                            String token3[]= NumberRating.split(" ");
+                            numNewRating = Double.parseDouble(NewRating);
+                            numOldRating = Double.parseDouble(token1[1]);
+                            numberOfRating = Double.parseDouble(token3[0]);
+                            average = ((numOldRating * numberOfRating) + numNewRating) / (numberOfRating + 1) ;
+                            NewNumberOfRating =  (int)numberOfRating + 1;
+
+                            BigDecimal bd = new BigDecimal(average);
+                            bd = bd.round(new MathContext(2));
+                             rounded = bd.doubleValue();
+
+                             result = String.valueOf(rounded);
+                            result2 =String.valueOf(NewNumberOfRating);
+                             result = "Rating: "+result + "/5";
+                             result2 = result2 +" Rating";
+                            query2="UPDATE " +TABLE_NAME +" SET Rating ="+ "'"+result+"'" +" WHERE email =" + "'"+Email+"'";
+                            query4="UPDATE " +TABLE_NAME +" SET NumberRating ="+ "'"+result2+"'" +" WHERE email =" + "'"+Email+"'";
+                            sqLiteDatabase.execSQL(query2);
+                            sqLiteDatabase.execSQL(query4);
+
+
+                        }
+
+                        break;
+                    }
+                }
+            }while(cursor.moveToNext());
+        }
+
+
     }
 
 
