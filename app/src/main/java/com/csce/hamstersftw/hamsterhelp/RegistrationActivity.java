@@ -122,6 +122,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
 //                    startActivity(i);
 //                }
 //            }, 5000);
+            
             Toast.makeText(this,"Please fill all the information",Toast.LENGTH_LONG).show();
         }else {
 
