@@ -98,7 +98,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
 
 
         if (TextUtils.isEmpty(firstname) || TextUtils.isEmpty(lastname) || TextUtils.isEmpty(birthday) || TextUtils.isEmpty(phno) || TextUtils.isEmpty(addres1)
-                || TextUtils.isEmpty(addres2)|| TextUtils.isEmpty(Email)|| TextUtils.isEmpty(Password)) {
+                || TextUtils.isEmpty(Email)|| TextUtils.isEmpty(Password)) {
             i = 1;
 
         }
