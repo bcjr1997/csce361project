@@ -3,7 +3,8 @@
     package="com.csce.hamstersftw.hamsterhelp">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.ANSWER_PHONE_CALLS"/>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -32,7 +33,7 @@
             android:resource="@array/preloaded_fonts" />
 
         <activity android:name=".EmailResultPage" />
-        <activity android:name=".ListViewDisplayPage"></activity>
+        <activity android:name=".ListViewDisplayPage" />
     </application>
 
 </manifest>

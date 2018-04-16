@@ -74,4 +74,29 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/smile_Rating" />
+
+    <TextView
+        android:id="@+id/addHelperText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="200dp"
+        android:layout_marginStart="200dp"
+        android:text="Do you want to add him as your HamsterBuddy?"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="461dp" />
+
+    <Button
+        android:id="@+id/addHelperButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="154dp"
+        android:layout_marginEnd="300dp"
+        android:layout_marginStart="323dp"
+        android:layout_marginTop="69dp"
+        android:text="Buddify!!"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addHelperText" />
 </android.support.constraint.ConstraintLayout>

@@ -47,10 +47,12 @@ public class Databasehelper extends SQLiteOpenHelper {
         sqLiteDatabase = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         String query = "select * from Information";
-        // Uncomment this two line if can not find the table Tag
-//       String query1 = "ALTER TABLE Information ADD COLUMN NumberRating ";
-//
-//          sqLiteDatabase.execSQL(query1);
+         //Uncomment this two line if can not find the table Tag
+        //Uncomment query1 and the execution method if the TAG column is not found in the table
+       String query1 = "ALTER TABLE Information ADD COLUMN NumberRating ";
+//       String query2 = "ALTER TABLE Information ADD COLUMN Tag";
+//       sqLiteDatabase.execSQL(query2);
+       sqLiteDatabase.execSQL(query1);
         Cursor cursor = sqLiteDatabase.rawQuery(query, null);
         int count = cursor.getCount();
         values.put(COLUMN_ID, count);
@@ -116,7 +118,7 @@ public class Databasehelper extends SQLiteOpenHelper {
         ArrayList<String> TagInformation = new ArrayList<String>();
         String query = "select Tag,FirstName from "+TABLE_NAME;
         Cursor cursor = sqLiteDatabase.rawQuery(query,null);
-       // Userinfo TagInfo = new Userinfo();
+        // Userinfo TagInfo = new Userinfo();
         String a,FirstName;
         FirstName = "not found";
 
@@ -142,7 +144,7 @@ public class Databasehelper extends SQLiteOpenHelper {
         ArrayList<Userinfo> TagInformation = new ArrayList<Userinfo>();
         String query = "select Tag,FirstName,Rating,NumberRating,email from "+TABLE_NAME;
         Cursor cursor = sqLiteDatabase.rawQuery(query,null);
-         
+
         String a,FirstName,NumberRating;
         String Rating = "none";
         FirstName = "not found";
@@ -203,6 +205,7 @@ public class Databasehelper extends SQLiteOpenHelper {
                         PersonInformation.add(lastName);
                         PersonInformation.add(Email);
                         PersonInformation.add(Mobile);
+                        PersonInformation.add(cursor.getString(1));
                         break;
                     }
                 }
@@ -213,13 +216,13 @@ public class Databasehelper extends SQLiteOpenHelper {
     public ArrayList<String> EmailSearchPersonalInformation(String Email ) {
         sqLiteDatabase = this.getReadableDatabase();
         ArrayList<String> PersonInformationByEmail = new ArrayList<String>();
-        String query = "select email,FirstName,lastName,mobile from "+TABLE_NAME;
+        String query = "select email,FirstName,lastName,mobile,Tag from "+TABLE_NAME;
         Cursor cursor = sqLiteDatabase.rawQuery(query,null);
-        String a,firstName,lastName,Mobile;
+        String a,firstName,lastName,Mobile,helperTag;
         firstName = "not found";
         lastName = "not found";
         Mobile = "not found";
-
+        helperTag = "not found";
         if(cursor.moveToFirst()){
             do{
                 a = cursor.getString(0);
@@ -229,11 +232,12 @@ public class Databasehelper extends SQLiteOpenHelper {
                         firstName= cursor.getString(1);
                         lastName=  cursor.getString(2);
                         Mobile = cursor.getString(3);
-
+                        helperTag = cursor.getString(4);
                         PersonInformationByEmail.add(firstName);
                         PersonInformationByEmail.add(lastName);
                         PersonInformationByEmail.add(Email);
                         PersonInformationByEmail.add(Mobile);
+                        PersonInformationByEmail.add(helperTag);
                         break;
                     }
                 }
@@ -244,10 +248,10 @@ public class Databasehelper extends SQLiteOpenHelper {
     public void UpdateRating (String Email, String NewRating){
         sqLiteDatabase = this.getReadableDatabase();
         String query = "select email,Rating,NumberRating from "+TABLE_NAME;
-        String query1 =" ";
-        String query2= " ";
-        String query3=" ";
-        String query4= " ";
+        String query1 ="";
+        String query2= "";
+        String query3="";
+        String query4= "";
         double numNewRating = 0;
         double numOldRating = 0;
         double average = 0;
@@ -284,12 +288,12 @@ public class Databasehelper extends SQLiteOpenHelper {
 
                             BigDecimal bd = new BigDecimal(average);
                             bd = bd.round(new MathContext(2));
-                             rounded = bd.doubleValue();
+                            rounded = bd.doubleValue();
 
-                             result = String.valueOf(rounded);
+                            result = String.valueOf(rounded);
                             result2 =String.valueOf(NewNumberOfRating);
-                             result = "Rating: "+result + "/5";
-                             result2 = result2 +" Rating";
+                            result = "Rating: "+result + "/5";
+                            result2 = result2 +" Rating";
                             query2="UPDATE " +TABLE_NAME +" SET Rating ="+ "'"+result+"'" +" WHERE email =" + "'"+Email+"'";
                             query4="UPDATE " +TABLE_NAME +" SET NumberRating ="+ "'"+result2+"'" +" WHERE email =" + "'"+Email+"'";
                             sqLiteDatabase.execSQL(query2);
