@@ -77,4 +77,48 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView5" />
 
+    <TextView
+        android:id="@+id/currentHelperText"
+        android:layout_width="283dp"
+        android:layout_height="34dp"
+        android:layout_marginBottom="26dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="28dp"
+        android:text="Current Helper:"
+        app:layout_constraintBottom_toTopOf="@+id/helperPhoneText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.357"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tagButton" />
+
+    <Button
+        android:id="@+id/helperCallButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="82dp"
+        android:layout_marginEnd="160dp"
+        android:layout_marginStart="139dp"
+        android:layout_marginTop="62dp"
+        android:text="Call Helper"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/currentHelperText" />
+
+    <TextView
+        android:id="@+id/helperPhoneText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="41dp"
+        android:layout_marginEnd="100dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="26dp"
+        android:text="HamsterBuddy 's Phone Number: "
+        app:layout_constraintBottom_toTopOf="@+id/helperCallButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/currentHelperText" />
+
 </android.support.constraint.ConstraintLayout>

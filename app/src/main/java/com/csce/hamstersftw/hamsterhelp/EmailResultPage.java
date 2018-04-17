@@ -15,10 +15,17 @@ import java.util.ArrayList;
 
 public class EmailResultPage extends AppCompatActivity implements View.OnClickListener{
     Databasehelper helper = new Databasehelper(this);
+    homePageActivity homePage = new homePageActivity();
     private static final String TAG = "EmailResultPage";
     String RatingNumber = "3";
     private Button AddRating;
+    private Button addHelper;
     String email;
+    String helperPhoneNumber;
+    String helperFirstName;
+    String helperLastName;
+    String helperTag;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +36,6 @@ public class EmailResultPage extends AppCompatActivity implements View.OnClickLi
         AddRating.setOnClickListener(this);
         ArrayList<String> PersonalInformationByEmail = new ArrayList<String>();
         PersonalInformationByEmail = helper.EmailSearchPersonalInformation(email);
-
         TextView PersonFirstName = (TextView) findViewById(R.id.Firstname1);
         TextView PersonLastName = (TextView) findViewById(R.id.LastName1);
         TextView PersonEmail = (TextView) findViewById(R.id.Email1);
@@ -46,8 +52,15 @@ public class EmailResultPage extends AppCompatActivity implements View.OnClickLi
         Log.d(TAG,"onCreate: " + PersonalLastName);
         Log.d(TAG,"onCreate: " + PersonalEmail);
         Log.d(TAG,"onCreate: " + PersonalMobile);
+        //Add Helper Function
+        addHelper = findViewById(R.id.addHelperButton);
+        addHelper.setOnClickListener(this);
+        helperFirstName = PersonalInformationByEmail.get(0);
+        helperLastName = PersonalInformationByEmail.get(1);
+        helperPhoneNumber = PersonalInformationByEmail.get(3);
+        helperTag = PersonalInformationByEmail.get(4);
+        //Rating Function
         SmileRating smileRating = (SmileRating) findViewById(R.id.smile_Rating);
-
         smileRating.setOnSmileySelectionListener(new SmileRating.OnSmileySelectionListener() {
             @Override
             public void onSmileySelected(int smiley) {
@@ -86,6 +99,13 @@ public class EmailResultPage extends AppCompatActivity implements View.OnClickLi
 //            bundle.putString("Email",email);
 //            i.putExtras(bundle);
             startActivity(i);
+        }else if(view == addHelper){
+            homePage.setHelperFirstName(helperFirstName);
+            homePage.setHelperLastName(helperLastName);
+            homePage.setHelperPhoneNumber(helperPhoneNumber);
+            homePage.setHelperTag(helperTag);
+            Intent redirectToHome = new Intent(this, homePageActivity.class);
+            startActivity(redirectToHome);
         }
     }
 }

@@ -15,11 +15,17 @@ import java.util.ArrayList;
 
 public class ListViewDisplayPage extends AppCompatActivity implements View.OnClickListener{
     private Button AddRating;
+    private Button addHelper;
     Databasehelper helper = new Databasehelper(this);
+    homePageActivity homePage = new homePageActivity();
     private static final String TAG = "ListViewDisplayPage";
     String RatingNumber ="3";
     String email;
     String Tags;
+    String helperPhoneNumberTag;
+    String helperFirstNameTag;
+    String helperLastNameTag;
+    String helperTag;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,8 +61,15 @@ public class ListViewDisplayPage extends AppCompatActivity implements View.OnCli
         Log.d(TAG,"onCreate: " + PersonalEmail);
         Log.d(TAG,"onCreate: " + PersonalMobile);
 
+        //Add Helper Function
+        addHelper = findViewById(R.id.addHelperTagButton);
+        addHelper.setOnClickListener(this);
+        helperFirstNameTag = PersonalInformation.get(0);
+        helperLastNameTag = PersonalInformation.get(1);
+        helperPhoneNumberTag = PersonalInformation.get(3);
+        helperTag = PersonalInformation.get(4);
+        //Rating Function
         SmileRating smileRating = (SmileRating) findViewById(R.id.smile_Rating);
-
         smileRating.setOnSmileySelectionListener(new SmileRating.OnSmileySelectionListener() {
             @Override
             public void onSmileySelected(int smiley) {
@@ -101,6 +114,13 @@ public class ListViewDisplayPage extends AppCompatActivity implements View.OnCli
             bundle.putString("Tag",Tags);
             i.putExtras(bundle);
             startActivity(i);
+        }else if (view == addHelper){
+            homePage.setHelperFirstName(helperFirstNameTag);
+            homePage.setHelperLastName(helperLastNameTag);
+            homePage.setHelperPhoneNumber(helperPhoneNumberTag);
+            homePage.setHelperTag(helperTag);
+            Intent redirectToHome = new Intent(this, homePageActivity.class);
+            startActivity(redirectToHome);
         }
     }
 }
