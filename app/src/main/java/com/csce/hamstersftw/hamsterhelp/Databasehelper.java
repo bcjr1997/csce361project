@@ -29,9 +29,11 @@ public class Databasehelper extends SQLiteOpenHelper {
     private static final String COLUMN_e = "email";
     private static final String COLUMN_p = "password";
     private static final String COLUMN_Tag = "Tag";
+    private static final String COLUMN_NumberRating = "NumberRating";
+    private static final String COLUMN_Rating = "Rating";
     SQLiteDatabase sqLiteDatabase;
     private static final String TABLE_CREATE = "create table Information (id integer primary key not null , " +
-            "Tag text not null, FirstName text not null, lastName text not null, birthDay text not null, mobile text not null, addressLine1 text not null, addressLine2 text not null,email text not null,password text not null)";
+            "Tag text not null, FirstName text not null, lastName text not null, birthDay text not null, mobile text not null, addressLine1 text not null, addressLine2 text not null,email text not null,password text not null,NumberRating text not null,Rating text not null)";
 
     public Databasehelper(Context context){
         super(context,DATABASE_NAME,null,DATABASE_VERSION);
@@ -47,16 +49,20 @@ public class Databasehelper extends SQLiteOpenHelper {
         sqLiteDatabase = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         String query = "select * from Information";
-         //Uncomment this two line if can not find the table Tag
+        //Uncomment this two line if can not find the table Tag
         //Uncomment query1 and the execution method if the TAG column is not found in the table
-       String query1 = "ALTER TABLE Information ADD COLUMN NumberRating ";
-//       String query2 = "ALTER TABLE Information ADD COLUMN Tag";
+//       String query1 = "ALTER TABLE Information ADD COLUMN NumberRating ";
+//       String query2 = "ALTER TABLE Information ADD COLUMN Rating";
+       //String query3 = "ALTER TABLE Information ADD COLUMN Tag";
 //       sqLiteDatabase.execSQL(query2);
-       sqLiteDatabase.execSQL(query1);
+//       sqLiteDatabase.execSQL(query1);
+       //sqLiteDatabase.execSQL(query3);
         Cursor cursor = sqLiteDatabase.rawQuery(query, null);
         int count = cursor.getCount();
         values.put(COLUMN_ID, count);
         values.put(COLUMN_Tag,u.getTag());
+        values.put(COLUMN_NumberRating,"0");
+        values.put(COLUMN_Rating,"0");
         values.put(COLUMN_Fname, u.getFirstName());
         values.put(COLUMN_Lname,u.getLastName());
         values.put(COLUMN_Bday,u.getBirthDay());
@@ -160,11 +166,11 @@ public class Databasehelper extends SQLiteOpenHelper {
                         Userinfo TagInfo = new Userinfo();
                         FirstName = cursor.getString(1);
                         email = cursor.getString(4);
-                        if (Rating == null ){
+                        if (Rating.equals("0") ){
                             Rating = "Rating :none";
                         }
                         NumberRating = cursor.getString(3);
-                        if (NumberRating == null ){
+                        if (NumberRating.equals("0") ){
                             NumberRating = "0 Rating";
                         }
                         TagInfo.setFirstName(FirstName);
@@ -270,7 +276,7 @@ public class Databasehelper extends SQLiteOpenHelper {
                 NumberRating = cursor.getString(2);
                 if(email != null ) {
                     if (email.equals(Email) ) {
-                        if (Rating == null ){
+                        if (Rating.equals("0") ){
                             NewRating ="Rating: "+ NewRating + "/5";
                             query1="UPDATE " +TABLE_NAME +" SET Rating ="+ "'"+NewRating+"'" +" WHERE email =" + "'"+Email+"'";
                             query3="UPDATE " +TABLE_NAME +" SET NumberRating ="+ "'"+"1 Rating"+"'" +" WHERE email =" + "'"+Email+"'";
@@ -315,7 +321,7 @@ public class Databasehelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-//        String query = "DROP TABLE IF EXISTS" + TABLE_NAME;
+//        String query = "DROP TABLE IF Exists " + TABLE_NAME;
 //        sqLiteDatabase.execSQL(query);
 //        this.onCreate(sqLiteDatabase);
     }
