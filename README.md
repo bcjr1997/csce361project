@@ -5,7 +5,6 @@ that allows user to login or register for a new account.
 
 
 REGISTRATION AND LOGIN
-
 For new registration, the user will have to click the registration link located at the bottom of the application. The registration 
 link will redirect the user to the registration page where user information is required. The information required are First Name, Last
 Name, Date of Birth (DOB), Mobile Number, Address Line 1, Address Line 2, Email address, Password, and the selection between "Here to Help!" 
@@ -17,7 +16,6 @@ the screen.
 
 
 MATCHING WITH USERS
-
 The user can choose between matching with helpers or people who needs help with 2 methods, Tag and Email. Selecting the TAG button will 
 redirect the application to the tag searching page where the user can choose between "Here to Help!" and "I need Help!" tags to display 
 the list of registered users (depending on their tags when registering) with the number of user rating and the average rating. The user 
